@@ -2,6 +2,7 @@ import React from "react";
 import CharacterCard from "./CharacterCard";
 import styles from "./styles/HomePage.module.css";
 import { useSearch } from "../hooks/useSearch";
+import { useNavigate } from "react-router-dom";
 
 const HomePage: React.FC = () => {
   const {
@@ -14,6 +15,8 @@ const HomePage: React.FC = () => {
     handlePageChange,
     searchTerm,
   } = useSearch("");
+  
+  const navigate = useNavigate();
 
   return (
     <div className={styles.container}>
@@ -50,10 +53,13 @@ const HomePage: React.FC = () => {
           <button onClick={() => handleSearch('Z Fighter', 'affiliation')}>
             Z Fighter
           </button> 
-
           <button onClick={() => handleSearch('Android', 'race')}>
           Android
-          </button>     </aside>
+          </button>     
+            <h2>Planets</h2>
+        <button onClick={() => navigate('/planets')}>Planets</button>
+
+        </aside>
         <div className={styles.cardsContainer}>
           {loading ? (
             <p>Loading...</p>

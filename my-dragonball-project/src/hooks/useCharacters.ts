@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback } from 'react';
-import CharacterService from '../service/characterSService';
-import { CharacterDto } from '../models/characters/characterDto';
+import CharacterService from '../service/characterService';
+import { CharacterDto } from '../models/characterDto';
 
 interface PaginationLinks {
   first: string;

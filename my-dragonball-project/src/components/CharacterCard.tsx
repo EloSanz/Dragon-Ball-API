@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './styles/CharacterCard.module.css';
-import { CharacterDto } from '../models/characters/characterDto';
+import { CharacterDto } from '../models/characterDto';
 import { useNavigate } from 'react-router-dom';
 
 interface CharacterCardProps {

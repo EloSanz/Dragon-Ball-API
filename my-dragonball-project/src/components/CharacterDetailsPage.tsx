@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
-import { CharacterDto } from '../models/characters/characterDto';
+import { useNavigate, useParams } from 'react-router-dom';
+import { CharacterDto } from '../models/characterDto';
 import styles from './styles/CharacterDetailsPage.module.css';
-import CharacterService from '../service/characterSService';
+import CharacterService from '../service/characterService';
 
 const CharacterDetailsPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -10,6 +10,12 @@ const CharacterDetailsPage: React.FC = () => {
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
+  const navigate = useNavigate();
+
+  const handleRedirect = () => {
+    navigate('/');
+  };
+  
   useEffect(() => {
     const fetchCharacter = async () => {
       try {
@@ -34,7 +40,10 @@ const CharacterDetailsPage: React.FC = () => {
   if (!character) return <p>No character found.</p>;
 
   return (
-    <div className={styles.details}>
+    <div>      
+      <button onClick={handleRedirect}>Go to Home</button>
+
+      <div className={styles.details}>
       <h2 className={styles.name}>{character.name}</h2>
       <img className={styles.image} src={character.image} alt={character.name} />
       <p><strong>Race:</strong> {character.race}</p>
@@ -55,6 +64,8 @@ const CharacterDetailsPage: React.FC = () => {
           <p>No transformations available.</p>
         )}
       </div>
+      </div>
+    
     </div>
   );
 };
