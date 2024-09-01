@@ -1,12 +1,11 @@
-import React, { useState } from 'react';
-import styles from './styles/SearchBar.module.css';
+import React, { useState } from "react";
 
 interface SearchBarProps {
   onSearch: (searchTerm: string) => void;
 }
 
 const SearchBar: React.FC<SearchBarProps> = ({ onSearch }) => {
-  const [searchTerm, setSearchTerm] = useState('');
+  const [searchTerm, setSearchTerm] = useState("");
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(e.target.value);
@@ -17,14 +16,20 @@ const SearchBar: React.FC<SearchBarProps> = ({ onSearch }) => {
   };
 
   return (
-    <div className={styles.searchBar}>
+    <div className="right-10 pt-6 flex justify-end  ">
       <input
         type="text"
         value={searchTerm}
         onChange={handleChange}
         placeholder="Search characters..."
+        className="px-3.5 mr-4 placeholder-orange-300 text-orange-500 p-2 text-base border border-gray-300 rounded"
       />
-      <button onClick={handleSubmit}>Search</button>
+      <button
+        onClick={handleSubmit}
+        className="px-4 py-2 bg-blue-500 text-white font-bold rounded hover:bg-blue-700"
+      >
+        Search
+      </button>
     </div>
   );
 };

@@ -1,8 +1,13 @@
-import React from "react";
 import CharacterCard from "./CharacterCard";
-import styles from "./styles/HomePage.module.css";
 import { useSearch } from "../hooks/useSearch";
+// import cursorImg from "../assets/images/esfera_4_png.png"; 
+
 import { useNavigate } from "react-router-dom";
+import backgroundImg from "../assets/images/dragonBall.png";
+
+import Sidebar from "./Sidebar";
+import Footer from "./Footer";
+import Header from "./Header";
 
 const HomePage: React.FC = () => {
   const {
@@ -13,78 +18,44 @@ const HomePage: React.FC = () => {
     error,
     handleSearch,
     handlePageChange,
-    searchTerm,
+    paramName,
   } = useSearch("");
-  
+
   const navigate = useNavigate();
 
   return (
-    <div className={styles.container}>
-      <header className={styles.header}>
-        <h1>Dragon Ball Z Characters</h1>
-        <div className={styles.searchBar}>
-          <input
-            type="text"
-            value={searchTerm}
-            onChange={(e) => handleSearch(e.target.value, 'name' )}
-            placeholder="Search characters..."
-          />
-          <button onClick={() => handleSearch(searchTerm, 'name')}>Search</button>
-        </div>
-      </header>
-      <div className={styles.mainContent}>
-        <aside className={styles.sidebar}>
-          <h2>Filters</h2>
-          <button onClick={() => handleSearch('Saiyan', 'race')}>
-            Saiyans
-          </button>  
-          <button onClick={() => handleSearch('Frieza Race', 'race')}>
-          Frieza Race
-          </button>  
-          <button onClick={() => handleSearch('Namekian', 'race')}>
-          Namekian
-          </button>      
-          <button onClick={() => handleSearch('God', 'race')}>
-          Gods
-          </button>     
-          <button onClick={() => handleSearch('Nucleico', 'race')}>
-          Kaios
-          </button>   
-          <button onClick={() => handleSearch('Z Fighter', 'affiliation')}>
-            Z Fighter
-          </button> 
-          <button onClick={() => handleSearch('Android', 'race')}>
-          Android
-          </button>     
-            <h2>Planets</h2>
-        <button onClick={() => navigate('/planets')}>Planets</button>
+    <div>
+      <Header
+        backgroundImg={backgroundImg}
+        handleSearch={handleSearch}
+        paramName={paramName}
+      />
 
-        </aside>
-        <div className={styles.cardsContainer}>
-          {loading ? (
-            <p>Loading...</p>
-          ) : error ? (
-            <p>{error}</p>
-          ) : (
-            characters.map((character) => (
-              <CharacterCard key={character.id} character={character} />
-            ))
-          )}
-        </div>
-      </div>
-      <footer className={styles.pagination}>
-        {meta?.currentPage && meta.currentPage > 1 && (
-          <button onClick={() => handlePageChange(meta.currentPage - 1)}>
-            Previous
-          </button>
-        )}
+      {/* Main content */}
+      <main
+        className="flex flex-1 pt-[140px]"
+        style={{ background: "linear-gradient(to right, #FF7E5F, #FEB47B)" }}
+      >
+        {/* Sidebar */}
+        <Sidebar handleSearch={handleSearch} navigate={navigate} />
 
-        {links?.next && (
-          <button onClick={() => handlePageChange((meta?.currentPage ?? 1) + 1)} >
-            Next
-          </button>
-        )}
-      </footer>
+        {/* Cards Container */}
+        <div className="w-3/4 p-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+            {loading ? (
+              <p>Loading...</p>
+            ) : error ? (
+              <p>{error}</p>
+            ) : (
+              characters.map((character) => (
+                <CharacterCard key={character.id} character={character} />
+              ))
+            )}
+          </div>
+        </div>
+      </main>
+
+      <Footer meta={meta} links={links} handlePageChange={handlePageChange} />
     </div>
   );
 };
