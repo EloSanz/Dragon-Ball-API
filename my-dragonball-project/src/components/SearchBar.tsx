@@ -16,7 +16,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ onSearch }) => {
   };
 
   return (
-    <div className="right-10 pt-6 flex justify-end  ">
+    <div className="right-10 pt-4 flex justify-center  ">
       <input
         type="text"
         value={searchTerm}

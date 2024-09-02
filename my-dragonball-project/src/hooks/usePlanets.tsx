@@ -1,6 +1,6 @@
-import { useState, useEffect } from 'react';
-import axios from 'axios';
-import { PlanetDto } from '../models/PlanetDto';
+import { useState, useEffect } from "react";
+import { PlanetDto } from "../models/PlanetDto";
+import PlanetService from "../service/planetService";
 
 export const usePlanets = () => {
   const [planets, setPlanets] = useState<PlanetDto[]>([]);
@@ -11,10 +11,10 @@ export const usePlanets = () => {
     const fetchPlanets = async () => {
       setLoading(true);
       try {
-        const response = await axios.get('https://dragonball-api.com/api/planets?limit=20');
-        setPlanets(response.data.items);
+        const planetsData = await PlanetService.getPlanets();
+        setPlanets(planetsData);
       } catch (error) {
-        setError('Error fetching planets');
+        setError("Error fetching planets");
         console.error(error);
       } finally {
         setLoading(false);

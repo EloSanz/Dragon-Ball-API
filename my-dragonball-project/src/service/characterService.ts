@@ -19,7 +19,7 @@ interface PaginationResponse<T> {
 
 class CharacterService {
 
-  static async getCharacters(page: number = 1, limit: number = 9, search: string = '', paramName: string = 'name'): Promise<PaginationResponse<CharacterDto>> {
+  static async getCharacters(page: number = 1, limit: number = 12, search: string = '', paramName: string = 'name'): Promise<PaginationResponse<CharacterDto>> {
     try {
       const response = await axios.get(`${BASE_URL}`, {
         params: {

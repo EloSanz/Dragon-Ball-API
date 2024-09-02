@@ -5,7 +5,7 @@ export const useSearch = (initialSearch: string = '') => {
     const [searchTerm, setSearchTerm] = useState(initialSearch);
     const [paramName, setParamName] = useState('name');
     const [currentPage, setCurrentPage] = useState(1);
-    const { characters, links, meta, loading, error, fetchCharacters } = useCharacters(currentPage, 10, searchTerm, paramName);
+    const { characters, links, meta, loading, error, fetchCharacters } = useCharacters(currentPage, 12, searchTerm, paramName);
   
   useEffect(() => {
     fetchCharacters(currentPage);

@@ -20,6 +20,7 @@ export const useCharacters = (initialPage: number = 1, limit: number = 10, searc
   const [meta, setMeta] = useState<MetaInfo | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
+  const [characterDetails, setCharacterDetails] = useState<CharacterDto | null>(null);
 
   const fetchCharacters = useCallback(async (page: number = initialPage) => {
     setLoading(true);
@@ -38,6 +39,20 @@ export const useCharacters = (initialPage: number = 1, limit: number = 10, searc
     }
   }, [initialPage, limit, search, paramName]);
 
+  const fetchCharacterById = useCallback(async (id: number) => {
+    setLoading(true);
+    setError(null);
+
+    try {
+      const data = await CharacterService.getCharacterById(id);
+      setCharacterDetails(data);
+    } catch (error) {
+      setError('Error fetching character details');
+      console.error(error);
+    } finally {
+      setLoading(false);
+    }
+  }, []);
 
   useEffect(() => {
     fetchCharacters(initialPage);
@@ -50,5 +65,7 @@ export const useCharacters = (initialPage: number = 1, limit: number = 10, searc
     loading,
     error,
     fetchCharacters,
+    characterDetails,
+    fetchCharacterById,
   };
 };

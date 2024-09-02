@@ -2,6 +2,7 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import styles from "./Planet.module.css";
 import { usePlanets } from "../../hooks/usePlanets";
+import DragonBallButton from "../DragonBallButton";
 
 const Planet: React.FC = () => {
   const { planets, loading, error } = usePlanets();
@@ -25,7 +26,11 @@ const Planet: React.FC = () => {
 
   return (
     <div>
-      <button onClick={handleRedirect}>Go to Home</button>
+      
+      <DragonBallButton
+          text="Home"
+          onClick={() => handleRedirect()}
+        />
       <div className={styles.planetContainer}>
         {planets.map((planet) => (
           <div

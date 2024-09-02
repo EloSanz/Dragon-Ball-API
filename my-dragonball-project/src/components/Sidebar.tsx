@@ -10,15 +10,15 @@ interface SidebarProps {
 const Sidebar: React.FC<SidebarProps> = ({ handleSearch, navigate }) => {
   return (
     <aside
-      className="w-60 p-5 bg-orange-500 hidden md:block"
+      className="w-60 p-5 bg-orange-500 hidden md:block "
       style={{
         backgroundImage: `url(${backgroundImg})`,
-        backgroundSize: "auto",
+        backgroundSize: "cover",
         backgroundPosition: "center",
         backgroundRepeat: "no-repeat",
       }}
     >
-      <h2 className="text-lg font-bold mb-4 text-center">Filters</h2>
+      <h2 className="text-3xl font-bold mb-4 text-center">Filters</h2>
 
       <div className="flex flex-col items-center">
         <DragonBallButton
@@ -51,13 +51,16 @@ const Sidebar: React.FC<SidebarProps> = ({ handleSearch, navigate }) => {
         />
       </div>
 
-      <h2 className="text-lg font-bold mt-4 mb-2">Planets</h2>
-      <button
-        onClick={() => navigate("/planets")}
-        className="block px-4 py-2 font-semibold text-white bg-green-500 rounded-md hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-400"
-      >
-        Planets
-      </button>
+      <div className="flex flex-col items-center">
+        <h2 className="text-center text-3xl font-bold mt-4 mb-2">Planets</h2>
+        <button
+          onClick={() => navigate("/planets")}
+          className=" block px-4 py-2 font-semibold text-white bg-green-500 rounded-md hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-400"
+        >
+          Go to another Planet
+        </button>
+      </div>
+       
     </aside>
   );
 };
