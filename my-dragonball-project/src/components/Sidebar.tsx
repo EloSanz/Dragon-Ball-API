@@ -10,7 +10,7 @@ interface SidebarProps {
 const Sidebar: React.FC<SidebarProps> = ({ handleSearch, navigate }) => {
   return (
     <aside
-      className="w-60 p-5 bg-orange-500 hidden md:block "
+      className="m-3 w-60 p-5 bg-orange-500 hidden md:block rounded-lg"
       style={{
         backgroundImage: `url(${backgroundImg})`,
         backgroundSize: "cover",
@@ -52,12 +52,12 @@ const Sidebar: React.FC<SidebarProps> = ({ handleSearch, navigate }) => {
       </div>
 
       <div className="flex flex-col items-center">
-        <h2 className="text-center text-3xl font-bold mt-4 mb-2">Planets</h2>
+        <h2 className=" text-center text-3xl font-bold mt-4 mb-2">Planets</h2>
         <button
           onClick={() => navigate("/planets")}
           className=" block px-4 py-2 font-semibold text-white bg-green-500 rounded-md hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-400"
         >
-          Go to another Planet
+          Let's go!
         </button>
       </div>
        

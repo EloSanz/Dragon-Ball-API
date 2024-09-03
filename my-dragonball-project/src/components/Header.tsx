@@ -14,18 +14,20 @@ const Header: React.FC<HeaderProps> = ({
 }) => {
   return (
     <header
-      className="shadow-md fixed top-0 w-full pt-5 z-10"
+      className=" shadow-md fixed top-0 w-screen pt-5 z-10 rounded-2xl p-4"
       style={{
-        height: "200px", 
+        height: "220px",
         backgroundImage: `url(${backgroundImg}) `,
-        backgroundSize: "cover", 
+        backgroundSize: "cover",
         backgroundPosition: "botton",
       }}
     >
-      <h1 className="px-8 py-5 text-4xl font-bold text-black hover:scale-105 transition-colors duration-300 justify-center">
-        Dragon Ball Z Characters
-      </h1>
-      
+      <div className="justify-center max-w-screen-sm text-center m-4">
+        <h1 className="bg-gray-800 bg-opacity-50 backdrop-blur-lg font-extrabold px-3 py-5 text-4xl  text-white hover:scale-105 transition-colors duration-300 ">
+          Dragon Ball Z Characters
+        </h1>
+      </div>
+
       <SearchBar onSearch={(term) => handleSearch(term, paramName)} />
     </header>
   );

@@ -1,76 +1,64 @@
-import React, { useState } from "react";
+import React from "react";
 import { CharacterDto } from "../models/characterDto";
-import Transformations from "./Transformations";
 
 interface CharacterCardProps {
   character: CharacterDto;
-  onShowPlanet: () => void; // Función para mostrar el planeta
+  onShowPlanet: () => void;
+  showTransformations: boolean;
+  onToggleTransformations: () => void;
 }
 
 const CharacterCard_2: React.FC<CharacterCardProps> = ({
   character,
   onShowPlanet,
+  showTransformations,
+  onToggleTransformations,
 }) => {
-  const [showTransformations, setShowTransformations] = useState(false);
-
-  const handleToggleTransformations = () => {
-    setShowTransformations((prevState) => !prevState);
-  };
-
   return (
     <>
       <div
         id="character-card-container"
-        className="ml-4 max-w-24 md:max-w-36 lg:max-w-screen-md bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 transform transition-transform duration-500"
-        >
-        <img
-          src={character.image}
-          alt={character.name}
-          className="ml-3 rounded-t-lg w-48 md:w-64 h-auto object-contain hover:scale-110 transition-transform duration-300"
+        className="mb-4 w-full max-w-xl ml-4 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 transform transition-transform duration-500"
+      >
+        <div className="flex flex-col p-4">
+          {/* Nombre del personaje y botones */}
+          <div className="flex justify-between items-center">
+            <h5 className="text-4xl font-bold tracking-tight text-gray-900 dark:text-white">
+              {character.name}
+            </h5>
+            <div className="flex space-x-2">
+              <button
+                onClick={onShowPlanet}
+                className="px-3 py-2 text-sm font-medium text-white bg-green-700 rounded-lg hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800"
+              >
+                Show Planet
+              </button>
+              <button
+                onClick={onToggleTransformations}
+                className="px-3 py-2 text-sm font-medium text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+              >
+                {showTransformations
+                  ? "Hide Transformations"
+                  : "Show Transformations"}
+              </button>
+            </div>
+          </div>
+
+          {/* Imagen */}
+          <img
+            src={character.image}
+            alt={character.name}
+            className="hover:scale-110 transition-transform duration-500 w-full max-h-64 object-contain mt-4"
           />
-        <div className="p-5">
-          <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-            {character.name}
-          </h5>
-          <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">
-            {character.description}
-          </p>
-          <button
-            onClick={onShowPlanet}
-            className="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-green-700 rounded-lg hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800"
-          >
-            Show Planet
-          </button>
-          <button
-            onClick={handleToggleTransformations}
-            className="ml-2 inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-          >
-            {showTransformations
-              ? "Hide Transformations"
-              : "Show Transformations"}
-            <svg
-              className="rtl:rotate-180 w-3.5 h-3.5 ms-2"
-              aria-hidden="true"
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 14 10"
-            >
-              <path
-                stroke="currentColor"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M1 5h12m0 0L9 1m4 4L9 9"
-              />
-            </svg>
-          </button>
+
+          {/* Descripción */}
+          <div className="">
+            <p className="font-normal text-gray-700 dark:text-gray-400">
+              {character.description}
+            </p>
+          </div>
         </div>
       </div>
-
-      <Transformations
-        transformations={character.transformations}
-        showTransformations={showTransformations}
-      />
     </>
   );
 };

@@ -2,8 +2,8 @@ import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import HomePage from './components/HomePage';
 import CharacterDetailsPage from './components/CharacterDetailsPage';
-import Planet from './components/Planets/Planet';
 import PlanetDetail from './components/Planets/PlanetDetail';
+import Planets from './components/Planets/Planets';
 
 const App: React.FC = () => {
   return (
@@ -13,7 +13,7 @@ const App: React.FC = () => {
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/character/:id" element={<CharacterDetailsPage />} />
-            <Route path="/planets" element={<Planet />} />
+            <Route path="/planets" element={<Planets />} />
             <Route path="/planets/:id" element={<PlanetDetail />} />
 
           </Routes>

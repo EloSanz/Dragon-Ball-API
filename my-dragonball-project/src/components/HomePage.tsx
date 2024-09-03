@@ -33,7 +33,7 @@ const HomePage: React.FC = () => {
 
       {/* Main content */}
       <main
-        className="flex flex-1 pt-[200px]"
+        className="flex flex-1 pt-[220px]"
         style={{ background: "linear-gradient(to right, #FF7E5F, #FEB47B)" }}
       >
         {/* Sidebar */}
