@@ -1,64 +1,59 @@
-import axios from 'axios';
-import { CharacterDto } from '../models/characterDto';
+import axios from "axios";
+import { CharacterDto } from "../models/characterDto";
 
-const BASE_URL = 'https://dragonball-api.com/api/characters';
+const BASE_URL = "https://dragonball-api.com/api/characters";
 
-interface PaginationResponse<T> {
-  items: T[];
-  meta: {
-    currentPage: number;
-    totalPages: number;
-  };
-  links: {
-    first: string;
-    last: string;
-    next: string;
-    prev: string;
-  };
-}
+
 
 class CharacterService {
 
-  static async getCharacters(page: number = 1, limit: number = 12, search: string = '', paramName: string = 'name'): Promise<PaginationResponse<CharacterDto>> {
+  static async getCharactersWithFilters(
+    page: number,
+    limit: number,
+    search: string,
+    paramName: string
+  ): Promise<CharacterDto[]> {
     try {
-      const response = await axios.get(`${BASE_URL}`, {
+
+      const response = await axios.get(BASE_URL, {
         params: {
           page,
           limit,
           [paramName]: search
         }
       });
-      
-      if (response.data.items && response.data.links && response.data.meta) {
-        return response.data;
-      } else {
-        return {
-          items: response.data, 
-          links: {
-            first: '',
-            last: '',
-            next: '',
-            prev: '',
-          },
-          meta: {
-            currentPage: page,
-            totalPages: 1,
-          },
-        };
-      }
+      return response.data;
     } catch (error) {
       console.error('Error fetching characters:', error);
-      throw error;
+      return [] 
     }
   }
 
+    static async getAllCharacters(
+    page: number,
+    limit: number
+  ): Promise<CharacterDto[]> {
+    try {
 
+      const response = await axios.get(`${BASE_URL}`, {
+        params: {
+          page,
+          limit        
+        }
+      });
+      return response.data.items || [];
+    } catch (error) {
+      console.error('Error fetching characters:', error);
+      return [] 
+    }
+  }
+  
   static async getCharacterById(id: number): Promise<CharacterDto> {
     try {
       const response = await axios.get<CharacterDto>(`${BASE_URL}/${id}`);
       return response.data;
     } catch (error) {
-      console.error('Error fetching character:', error);
+      console.error("Error fetching character:", error);
       throw error;
     }
   }
