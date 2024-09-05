@@ -19,6 +19,43 @@ interface PaginationResponse<T> {
 
 class CharacterService {
 
+  static async getCharactersWithFilters(
+    page: number = 1,
+    limit: number = 12,
+    filters: { [key: string]: string[] }
+  ): Promise<PaginationResponse<CharacterDto>> {
+    try {
+      const params: { [key: string]: string } = { page: page.toString(), limit: limit.toString() };
+      
+      Object.keys(filters).forEach(key => {
+        params[key] = filters[key].join(','); 
+      });
+
+      const response = await axios.get(`${BASE_URL}`, { params });
+      
+      if (response.data.items && response.data.links && response.data.meta) {
+        return response.data;
+      } else {
+        return {
+          items: [], 
+          links: {
+            first: '',
+            last: '',
+            next: '',
+            prev: '',
+          },
+          meta: {
+            currentPage: page,
+            totalPages: 1,
+          },
+        };
+      }
+    } catch (error) {
+      console.error('Error fetching characters:', error);
+      throw error;
+    }
+  }
+
   static async getCharacters(page: number = 1, limit: number = 12, search: string = '', paramName: string = 'name'): Promise<PaginationResponse<CharacterDto>> {
     try {
       const response = await axios.get(`${BASE_URL}`, {
