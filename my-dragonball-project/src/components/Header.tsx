@@ -8,10 +8,12 @@ interface HeaderProps {
 }
 
 const Header: React.FC<HeaderProps> = ({
+  
   backgroundImg,
   handleSearch,
   paramName,
 }) => {
+
   return (
     <header
       className=" shadow-md fixed top-0 w-screen pt-5 z-10 rounded-2xl p-4"
