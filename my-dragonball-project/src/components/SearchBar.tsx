@@ -10,6 +10,12 @@ const SearchBar: React.FC<SearchBarProps> = ({ onSearch }) => {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(e.target.value);
   };
+  
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter') {
+      handleSubmit();
+    }
+  };
 
   const handleSubmit = () => {
     onSearch(searchTerm);
@@ -21,6 +27,8 @@ const SearchBar: React.FC<SearchBarProps> = ({ onSearch }) => {
         type="text"
         value={searchTerm}
         onChange={handleChange}
+        onKeyDown={handleKeyDown}
+
         placeholder="Search characters..."
         className="px-3.5 mr-4 placeholder-orange-300 text-orange-500 p-2 text-base border border-gray-300 rounded"
       />

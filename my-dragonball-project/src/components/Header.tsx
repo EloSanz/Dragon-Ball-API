@@ -4,14 +4,14 @@ import SearchBar from "./SearchBar";
 interface HeaderProps {
   backgroundImg: string;
   handleSearch: (term: string, paramName: string) => void;
-  paramName: string;
+
 }
 
 const Header: React.FC<HeaderProps> = ({
   
   backgroundImg,
   handleSearch,
-  paramName,
+
 }) => {
 
   return (
@@ -25,12 +25,14 @@ const Header: React.FC<HeaderProps> = ({
       }}
     >
       <div className="justify-center max-w-screen-sm text-center m-4">
-        <h1 className="bg-gray-800 bg-opacity-50 backdrop-blur-lg font-extrabold px-3 py-5 text-4xl  text-white hover:scale-105 transition-colors duration-300 ">
+        <h1 className="cursor-default drop-shadow-[0_1.6px_1.6px_rgba(0,1,1,1)]   font-extrabold px-3 py-5 text-6xl 
+         text-red-500 hover:scale-105 transition-colors duration-300">
+          
           Dragon Ball Z Characters
         </h1>
       </div>
 
-      <SearchBar onSearch={(term) => handleSearch(term, paramName)} />
+      <SearchBar onSearch={(term) => handleSearch(term, 'name')} />
     </header>
   );
 };

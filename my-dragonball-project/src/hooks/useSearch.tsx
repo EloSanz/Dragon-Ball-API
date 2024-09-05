@@ -1,34 +1,73 @@
 import { useState, useEffect, useCallback, useMemo } from 'react';
-import CharacterService from '../service/characterService';
+import CharacterService, { Links, Meta } from '../service/characterService';
 import { CharacterDto } from '../models/characterDto';
+import { useFilters } from '../FiltersProvider';
 
 export const useSearch = () => {
   const [characters, setCharacters] = useState<CharacterDto[]>([]);
-  const [meta, setMeta] = useState<{ currentPage: number; totalPages: number } | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [searchTerm, setSearchTerm] = useState<string>('');
   const [paramName, setParamName] = useState<string>('name');
   const [currentPage, setCurrentPage] = useState<number>(1);
-
+  const [meta, setMeta] = useState<Meta | null>(null);
+  const [links, setLinks] = useState<Links | null>(null);
+  
   const hasFilters = useMemo(() => searchTerm.length > 0, [searchTerm]);
+  const { activeFilters } = useFilters();
+
+
+  const filterCharactersByActiveFilters = (characters: CharacterDto[]) => {
+    return characters.filter(character => {
+      
+        const matchesRace = activeFilters.race.length === 0 || activeFilters.race.includes(character.race);
+        const matchesAffiliation = activeFilters.affiliation.length === 0 || activeFilters.affiliation.includes(character.affiliation);
+
+        return matchesRace && matchesAffiliation;
+    });
+};
+
 
   const fetchCharacters = useCallback(async (page: number, pageSize: number) => {
     setLoading(true);
     setError(null);
 
     try {
-      let characters: CharacterDto[] = [];
-        
+      let response;
 
-      if (hasFilters) { 
-        characters = await CharacterService.getCharactersWithFilters(page, pageSize, searchTerm, paramName);
-      } else { characters = await CharacterService.getAllCharacters(page, pageSize); }
+      if (hasFilters) {
+        if(paramName === 'name') {
+          response = await CharacterService.getCharactersWithFilters(
+            page,
+            pageSize,
+            searchTerm,
+            paramName
+          );
 
-      const meta = { currentPage: page, totalPages: Math.ceil(characters.length / pageSize) };
-      setCharacters(characters);
-      setMeta(meta);
+          filterCharactersByActiveFilters(response) 
+          
+          setCharacters(response);
+          return response;
+        }
 
+        response = await CharacterService.getCharactersWithFilters(
+          page,
+          pageSize,
+          searchTerm,
+          paramName
+        );
+        console.log(response)
+        setCharacters(response);
+        return response;
+      } else {
+        response = await CharacterService.getAllCharacters(page, pageSize);
+      }
+
+      const { items, meta, links } = response as { items: CharacterDto[]; meta: Meta; links: Links | null; };
+
+      setCharacters(items);
+      setMeta(meta); 
+      setLinks(links);
     } catch (err) {
       setError('Error fetching characters');
       console.error(err);
@@ -37,6 +76,8 @@ export const useSearch = () => {
     }
   }, [searchTerm, paramName, hasFilters]);
 
+
+  
   useEffect(() => {
     fetchCharacters(currentPage, 12);
   }, [currentPage, fetchCharacters]);
@@ -45,6 +86,7 @@ export const useSearch = () => {
     setSearchTerm(term);
     setParamName(paramName);
     setCurrentPage(1);
+    console.log(term, paramName);
   }, []);
 
   const handlePageChange = (page: number) => {
@@ -53,13 +95,14 @@ export const useSearch = () => {
 
   const showAllCharacters = () => {
     setSearchTerm('');
-    setParamName('');
+    setParamName('name'); // Setting default paramName or adjust as needed
     setCurrentPage(1);
   };
 
   return {
     characters,
     meta,
+    links,
     loading,
     error,
     handleSearch,
@@ -67,6 +110,9 @@ export const useSearch = () => {
     showAllCharacters,
     searchTerm,
     paramName,
-    currentPage
+    currentPage,
+    setParamName,
+    setSearchTerm,
+    fetchCharacters
   };
 };

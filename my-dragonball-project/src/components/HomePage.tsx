@@ -1,42 +1,41 @@
-import React from "react";
 import { useSearch } from "../hooks/useSearch";
 import { useNavigate } from "react-router-dom";
+import { useFilters } from '../FiltersProvider';
 import backgroundImg from "../assets/images/dragonBall.png";
 import Sidebar from "./Sidebar";
 import Footer from "./Footer";
 import Header from "./Header";
 import CharacterCard from "./CharacterCard";
-import { CharacterDto } from "../models/characterDto";
+import {  useEffect } from "react";
 
 const HomePage: React.FC = () => {
-  
-    const {
-        characters = [] as CharacterDto[],
-        meta,
-        loading,
-        error,
-        handleSearch,
-        handlePageChange,
-        showAllCharacters,
-        paramName,
-    } = useSearch();
-
+    const { activeFilters } = useFilters();
+    const { characters = [], loading, error, meta, handleSearch, handlePageChange, showAllCharacters, setParamName, setSearchTerm } = useSearch();
+    
     const navigate = useNavigate();
+
+    useEffect(() => {
+        console.log(activeFilters)  
+    }, [activeFilters, handleSearch, showAllCharacters]);
+    
 
     return (
         <div>
             <Header
                 backgroundImg={backgroundImg}
                 handleSearch={handleSearch}
-                paramName={paramName}
             />
-
             <main
                 className="flex flex-1 pt-[220px]"
                 style={{ background: "linear-gradient(to right, #FF7E5F, #FEB47B)" }}
             >
-                <Sidebar handleSearch={handleSearch} navigate={navigate} />
-
+                <Sidebar 
+                    showAllCharacters={showAllCharacters}
+                    handleSearch={handleSearch} 
+                    navigate={navigate} 
+                    setParamName = {setParamName}
+                    setSearchTerm = {setSearchTerm}
+                />
                 <div className="w-3/4 p-4">
                     <button
                         onClick={showAllCharacters}
@@ -57,10 +56,9 @@ const HomePage: React.FC = () => {
                     </div>
                 </div>
             </main>
-
             <Footer
                 meta={{ currentPage: meta?.currentPage ?? 1 }}
-                links={{ next: meta?.totalPages ?? 0 > (meta?.currentPage ?? 1) ? '/next' : null }}
+                links={{ next: (meta?.totalPages ?? 0) > (meta?.currentPage ?? 1) ? '/next' : null }}
                 handlePageChange={handlePageChange}
             />
         </div>
