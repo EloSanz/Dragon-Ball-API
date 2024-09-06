@@ -29,8 +29,7 @@ const Planets: React.FC = () => {
         
        <DragonBallButton
           text="Home"
-          onClick={handleRedirect}
-        />
+          onClick={handleRedirect}        />
 
       <div className="ml-40 flex-1 text-center md:text-left ">
         <h1 className="text-3xl font-bold mb-4 md:mb-0">Planets</h1>
@@ -38,7 +37,7 @@ const Planets: React.FC = () => {
 
       </header>
 
-      <div className="flex flex-wrap gap-4 p-4  "
+      <div className="flex flex-wrap gap-4 p-4 justify-center "
         style={
           {
             backgroundImage: `url(${starsWallpaper})`,

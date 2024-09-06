@@ -4,7 +4,7 @@ import star_4 from "../assets/images/esfera_4_png.png";
 interface DragonBallButtonProps {
   text: string;
   onClick: () => void;
-  active: boolean;
+  active?: boolean;
 }
 
 const DragonBallButton: React.FC<DragonBallButtonProps> = ({
