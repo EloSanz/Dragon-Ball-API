@@ -61,7 +61,7 @@ const CharacterDetailsPage: React.FC = () => {
     >
       <header className="bg-gray-800 text-white flex flex-col md:flex-row items-center p-4">
         <div className="md:w-1/4 flex justify-center">
-          <DragonBallButton text="Back to Home" onClick={handleRedirect} active={true} />
+          <DragonBallButton text="Back to Home" onClick={handleRedirect} active={false} />
         </div>
         <h1 className="text-4xl font-bold text-center mt-4 md:mt-0 md:ml-4">
           Character Details

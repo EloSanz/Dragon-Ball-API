@@ -44,9 +44,15 @@ const PlanetDetail: React.FC = () => {
   return (
     <>
       <header className="bg-gray-800 text-white p-4 flex flex-col md:flex-row items-center">
+
+
+        <div className='md:ml-4 '>
         <DragonBallButton text="Home" onClick={handleRedirect} active={false} />
-        <div className="ml-40 flex-1 text-center md:text-left">
-          <h1 className="text-3xl font-bold mb-4 md:mb-0">You are in {planet?.name}</h1>
+
+        </div>
+        
+        <div className="  flex-1 text-center md:text-center md:justify-center sm:text-center sm:justify-center">
+          <h1 className="text-3xl font-bold mb-4 md:mb-0 ">You are in {planet?.name}</h1>
         </div>
       </header>
       <div className={`min-h-screen ${bgColor ? `bg-[${bgColor}]` : 'bg-gray-100'} flex flex-col items-center p-6`}>

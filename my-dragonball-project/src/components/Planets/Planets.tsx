@@ -25,13 +25,16 @@ const Planets: React.FC = () => {
   return (
     <div>
        {/* Header */}
-       <header className="bg-gray-800 text-white p-4 flex flex-col md:flex-row items-center ">
+       <header className=" bg-gray-800 text-white p-4 flex flex-col md:flex-row items-center ">
         
-       <DragonBallButton
+        <div className="ml-6">
+        <DragonBallButton
           text="Home"
           onClick={handleRedirect}        />
+        </div>
+ 
 
-      <div className="ml-40 flex-1 text-center md:text-left ">
+      <div className="ml-10 flex-1 text-center md:text-left ">
         <h1 className="text-3xl font-bold mb-4 md:mb-0">Planets</h1>
       </div>
 

@@ -18,8 +18,8 @@ const CharacterCard: React.FC<CharacterCardProps> = ({ character }) => {
   }
 
   return (
-<div className="bg-gray-800 min-w-5 max-w-sm mx-10  cursor-pointer border border-gray-300 rounded-lg p-4 m-4 text-center shadow-sm hover:scale-110 hover:shadow-md transition-transform duration-300 " 
-    onClick={handleClick}
+<div className="bg-gray-800 w-full max-w-sm mx-auto cursor-pointer border border-gray-300 rounded-lg p-4 text-center shadow-sm hover:scale-110 hover:shadow-md transition-transform duration-300" 
+onClick={handleClick}
   >
     <h2 className="text-lg mb-2 text-white font-bold">{character.name}</h2>
     <img 

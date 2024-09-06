@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import React from 'react';
 import DragonBallButton from './DragonBallButton';
 import { useFilters } from '../FiltersProvider';
@@ -10,27 +9,27 @@ interface SidebarProps {
   navigate: (path: string) => void;
   setParamName: (param: string) => void;
   setSearchTerm: (term: string) => void;
-
 }
-const Sidebar: React.FC<SidebarProps> = ({ showAllCharacters, handleSearch, navigate, setParamName, setSearchTerm }) => {
-  
-  const { activeFilters, setActiveFilters } = useFilters();
-  
-  const handleFilterClick = (term: string, field: string) => {
 
+const Sidebar: React.FC<SidebarProps> = ({ showAllCharacters, handleSearch, navigate, setParamName, setSearchTerm }) => {
+  const { activeFilters, setActiveFilters } = useFilters();
+
+  const handleFilterClick = (term: string, field: string) => {
     setActiveFilters((prev) => {
       const newFilters = { ...prev };
       const isActive = newFilters[field]?.includes(term);
 
-      if (isActive) {
-        newFilters[field] = newFilters[field].filter((item) => item !== term);
-      } else {
-
-        newFilters[field] = [...(newFilters[field] || []), term];
+      // Clear other filters in the same field and set the new one
+      if (!isActive) {
+        newFilters[field] = [term];
         setSearchTerm(term);
         setParamName(field);
+      } else {
+        // If the filter is already active, clear it
+        newFilters[field] = [];
+        setSearchTerm('');
+        setParamName('');
       }
-
 
       return newFilters;
     });
