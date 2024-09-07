@@ -41,8 +41,7 @@ const HomePage: React.FC = () => {
         className="flex flex-1 pt-[220px]"
         style={{ background: "linear-gradient(to right, #FF7E5F, #FEB47B)" }}
       >
-        <Sidebar
-          showAllCharacters={showAllCharacters}
+        <Sidebar showAllCharacters={showAllCharacters}
           handleSearch={handleSearch}
           navigate={navigate}
           setParamName={setParamName}

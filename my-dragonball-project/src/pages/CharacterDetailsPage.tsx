@@ -7,12 +7,14 @@ import PlanetInformation from "../components/Planets/PlanetInformation";
 import CharacterCard_2 from "../components/Characters/CharacterCard_2";
 import Transformations from "../components/Characters/Transformations";
 import Loader from "../components/Loader";
+import { useFilters } from "../FiltersProvider";
 
 const CharacterDetailsPage: React.FC = () => {
   const { id = "0" } = useParams<{ id: string }>();
   const { character, loading, error } = useCharacterById(id);
   const [showPlanet, setShowPlanet] = useState(false);
   const [showTransformations, setShowTransformations] = useState(false);
+  const {  setActiveFilters } = useFilters();
 
   const navigate = useNavigate();
 
@@ -23,6 +25,8 @@ const CharacterDetailsPage: React.FC = () => {
   } = usePlanetByCharacterName(character?.name ?? "");
 
   const handleRedirect = () => {
+    setActiveFilters({ race: [], affiliation: [] }); 
+
     navigate("/");
   };
 
