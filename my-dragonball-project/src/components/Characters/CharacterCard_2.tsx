@@ -1,5 +1,5 @@
 import React from "react";
-import { CharacterDto } from "../models/characterDto";
+import { CharacterDto } from "../../models/characterDto";
 
 interface CharacterCardProps {
   character: CharacterDto;

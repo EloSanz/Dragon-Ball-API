@@ -1,7 +1,7 @@
 import React from 'react';
-import DragonBallButton from './DragonBallButton';
-import { useFilters } from '../FiltersProvider';
-import backgroundImg from '../assets/images/gokuNube.jpg';
+import backgroundImg from '../../assets/images/gokuNube.jpg';
+import { useFilters } from '../../FiltersProvider';
+import DragonBallButton from '../DragonBallButton';
 
 interface SidebarProps {
   showAllCharacters: () => void;

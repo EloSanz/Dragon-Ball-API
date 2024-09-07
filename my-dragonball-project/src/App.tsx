@@ -1,9 +1,9 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import HomePage from './components/HomePage';
-import CharacterDetailsPage from './components/CharacterDetailsPage';
+import HomePage from './pages/HomePage';
+import CharacterDetailsPage from './pages/CharacterDetailsPage';
 import PlanetDetail from './components/Planets/PlanetDetail';
-import Planets from './components/Planets/Planets';
+import Planets from './pages/PlanetsPage';
 
 const App: React.FC = () => {
   return (

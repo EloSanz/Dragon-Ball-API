@@ -2,12 +2,12 @@ import { useSearch } from "../hooks/useSearch";
 import { useNavigate } from "react-router-dom";
 import { useFilters } from "../FiltersProvider";
 import backgroundImg from "../assets/images/dragonBall.png";
-import Sidebar from "./Sidebar";
-import Footer from "./Footer";
-import Header from "./Header";
-import CharacterCard from "./CharacterCard";
+import Footer from "../components/Home/Footer";
 import { useEffect } from "react";
-import Pagination from "./Pagination";
+import Pagination from "../components/Home/Pagination";
+import CharacterCard from "../components/Characters/CharacterCard";
+import Header from "../components/Home/Header";
+import Sidebar from "../components/Home/Sidebar";
 
 const HomePage: React.FC = () => {
   const { activeFilters } = useFilters();

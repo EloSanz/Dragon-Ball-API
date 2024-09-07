@@ -2,10 +2,10 @@ import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import DragonBallButton from "../components/DragonBallButton";
 import { useCharacterById } from "../hooks/useCharacterById";
-import CharacterCard_2 from "./CharacterCard_2";
 import { usePlanetByCharacterName } from "../hooks/usePlanetByCharacterName ";
-import PlanetInformation from "./Planets/PlanetInformation";
-import Transformations from "./Transformations";
+import PlanetInformation from "../components/Planets/PlanetInformation";
+import CharacterCard_2 from "../components/Characters/CharacterCard_2";
+import Transformations from "../components/Characters/Transformations";
 
 const CharacterDetailsPage: React.FC = () => {
   const { id = "0" } = useParams<{ id: string }>();

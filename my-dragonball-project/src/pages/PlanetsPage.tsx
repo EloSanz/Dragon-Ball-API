@@ -1,10 +1,10 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import { usePlanets } from "../../hooks/usePlanets";
-import DragonBallButton from "../DragonBallButton";
-import PlanetCard from "./PlanetCard"; 
-import starsWallpaper from "../../assets/images/stars.jpg";
-import { PlanetDto } from "../../models/characterDto";
+import { usePlanets } from "../hooks/usePlanets";
+import DragonBallButton from "../components/DragonBallButton";
+import PlanetCard from "../components/Planets/PlanetCard"; 
+import starsWallpaper from "../assets/images/stars.jpg";
+import { PlanetDto } from "../models/characterDto";
 
 const Planets: React.FC = () => {
   const { planets, loading, error } = usePlanets();

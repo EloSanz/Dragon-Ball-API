@@ -1,6 +1,6 @@
 import React from "react";
-import { CharacterDto } from "../models/characterDto";
 import { useNavigate } from "react-router-dom";
+import { CharacterDto } from "../../models/characterDto";
 
 interface CharacterCardProps {
   character: CharacterDto;
