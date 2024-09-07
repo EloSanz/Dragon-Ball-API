@@ -34,8 +34,6 @@ const SearchBar: React.FC<SearchBarProps> = ({ onSearch, showAllCharacters}) => 
       </button>
     </div>
 
-
-
       <input
         type="text"
         value={searchTerm}

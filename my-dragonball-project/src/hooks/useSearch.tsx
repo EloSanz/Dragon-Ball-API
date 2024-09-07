@@ -96,7 +96,7 @@ export const useSearch = () => {
 
   
   useEffect(() => {
-    fetchCharacters(currentPage, 6  );
+    fetchCharacters(currentPage, 12);
   }, [currentPage, fetchCharacters]);
 
 

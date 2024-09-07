@@ -58,7 +58,6 @@ const CharacterDetailsPage: React.FC = () => {
       </div>
     );
   if (error) return <p>{error}</p>;
-  if (!character) return <p>No character found.</p>;
 
   return (
     <div
@@ -78,38 +77,42 @@ const CharacterDetailsPage: React.FC = () => {
         </h1>
       </header>
 
-      <main className="mt-4 flex-grow flex flex-col md:flex-row gap-4 p-4">
-        <div className="flex-1 flex flex-col md:flex-row gap-4">
-          {/* CharacterCard on the left */}
-          <div className="flex-1 flex justify-center items-start md:w-1/2">
-            <CharacterCard_2
-              character={character}
-              onShowPlanet={handleShowPlanet}
+      {!character ? (
+        <p>No character found.</p>
+      ) : (
+        <main className="mt-4 flex-grow flex flex-col md:flex-row gap-4 p-4">
+          <div className="flex-1 flex flex-col md:flex-row gap-4">
+            {/* CharacterCard on the left */}
+            <div className="flex-1 flex justify-center items-start md:w-1/2">
+              <CharacterCard_2
+                character={character}
+                onShowPlanet={handleShowPlanet}
+                showTransformations={showTransformations}
+                onToggleTransformations={handleToggleTransformations}
+              />
+            </div>
+
+            {/* PlanetInformation on the right */}
+            <div className="flex-none md:w-1/4 flex flex-col justify-center items-center">
+              <PlanetInformation
+                showPlanet={showPlanet}
+                characterName={character.name}
+                planetLoading={planetLoading}
+                planetError={planetError}
+                planet={planet}
+              />
+            </div>
+          </div>
+
+          {/* Transformations below PlanetInformation */}
+          <div className="flex-none w-full md:w-1/4 flex justify-center items-start mt-4 md:mt-0">
+            <Transformations
               showTransformations={showTransformations}
-              onToggleTransformations={handleToggleTransformations}
+              transformations={character.transformations}
             />
           </div>
-
-          {/* PlanetInformation on the right */}
-          <div className="flex-none md:w-1/4 flex flex-col justify-center items-center">
-            <PlanetInformation
-              showPlanet={showPlanet}
-              characterName={character.name}
-              planetLoading={planetLoading}
-              planetError={planetError}
-              planet={planet}
-            />
-          </div>
-        </div>
-
-        {/* Transformations below PlanetInformation */}
-        <div className="flex-none w-full md:w-1/4 flex justify-center items-start mt-4 md:mt-0">
-          <Transformations
-            showTransformations={showTransformations}
-            transformations={character.transformations}
-          />
-        </div>
-      </main>
+        </main>
+      )}
 
       {/* Footer */}
       <footer className="bg-gray-800 text-white p-4 text-center">
