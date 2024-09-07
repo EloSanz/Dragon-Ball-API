@@ -39,6 +39,8 @@ const PlanetInformation: React.FC<PlanetInformationProps> = ({
               Planet name: {planet?.name ?? "Unknown"}
             </p>
           </div>
+
+          
         )}
       </div>
     </div>

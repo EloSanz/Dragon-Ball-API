@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
-import { PlanetDto } from '../../models/PlanetDto';
-import PlanetService from '../../service/planetService';
-import DragonBallButton from '../DragonBallButton';
-import useDominantColor from '../../hooks/useDominantColor';
-import Loading from '../Loader';
+import React, { useState, useEffect } from "react";
+import { useParams, useNavigate } from "react-router-dom";
+import { PlanetDto } from "../../models/PlanetDto";
+import PlanetService from "../../service/planetService";
+import DragonBallButton from "../DragonBallButton";
+import useDominantColor from "../../hooks/useDominantColor";
+import Loading from "../Loader";
 const PlanetDetail: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const [planet, setPlanet] = useState<PlanetDto | null>(null);
@@ -14,7 +14,7 @@ const PlanetDetail: React.FC = () => {
   const bgColor = useDominantColor(planet?.image ?? null);
 
   const handleRedirect = () => {
-    navigate('/planets');
+    navigate("/planets");
   };
 
   useEffect(() => {
@@ -23,7 +23,7 @@ const PlanetDetail: React.FC = () => {
         const fetchedPlanet = await PlanetService.getPlanetById(Number(id));
         setPlanet(fetchedPlanet);
       } catch (error) {
-        setError('Error fetching planet details');
+        setError("Error fetching planet details");
         console.error(error);
       } finally {
         setLoading(false);
@@ -34,7 +34,7 @@ const PlanetDetail: React.FC = () => {
   }, [id]);
 
   if (loading) {
-    return <Loading></Loading>
+    return  <div className="w-full bg-black"><Loading></Loading></div>;
   }
 
   if (error) {
@@ -44,18 +44,26 @@ const PlanetDetail: React.FC = () => {
   return (
     <>
       <header className="bg-gray-800 text-white p-4 flex flex-col md:flex-row items-center">
-
-
-        <div className='md:ml-4 '>
-        <DragonBallButton text="Home" onClick={handleRedirect} active={false} />
-
+        <div className="md:ml-4 ">
+          <DragonBallButton
+            text="Home"
+            onClick={handleRedirect}
+            active={false}
+          />
         </div>
-        
+
         <div className="  flex-1 text-center md:text-center md:justify-center sm:text-center sm:justify-center">
-          <h1 className="text-3xl font-bold mb-4 md:mb-0 ">You are in {planet?.name}</h1>
+          <h1 className="text-3xl font-bold mb-4 md:mb-0 ">
+            You are in {planet?.name}
+          </h1>
         </div>
       </header>
-      <div className={`min-h-screen ${bgColor ? `bg-[${bgColor}]` : 'bg-gray-100'} flex flex-col items-center p-6`}>
+
+      <div
+        className={`min-h-screen ${
+          bgColor ? `${bgColor}` : "bg-gray-100"
+        } flex flex-col items-center p-6`}
+      >
         {planet ? (
           <div className="w-full max-w-3xl bg-white border border-gray-200 rounded-lg shadow-lg p-6">
             <h2 className="text-3xl font-bold text-gray-900 mb-4">

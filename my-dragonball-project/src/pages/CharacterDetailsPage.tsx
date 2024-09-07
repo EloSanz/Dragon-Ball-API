@@ -80,8 +80,8 @@ const CharacterDetailsPage: React.FC = () => {
       {!character ? (
         <p>No character found.</p>
       ) : (
-        <main className="mt-4 flex-grow flex flex-col md:flex-row gap-4 p-4">
-          <div className="flex-1 flex flex-col md:flex-row gap-4">
+        <main className="mt-4 flex-grow flex flex-col md:flex-row p-4">
+          <div className="flex-1 flex flex-col md:flex-row gap-2">
             {/* CharacterCard on the left */}
             <div className="flex-1 flex justify-center items-start md:w-1/2">
               <CharacterCard_2
@@ -93,7 +93,7 @@ const CharacterDetailsPage: React.FC = () => {
             </div>
 
             {/* PlanetInformation on the right */}
-            <div className="flex-none md:w-1/4 flex flex-col justify-center items-center">
+            <div className="flex-none md:w-1/2 flex flex-col justify-start items-center">
               <PlanetInformation
                 showPlanet={showPlanet}
                 characterName={character.name}
@@ -101,15 +101,14 @@ const CharacterDetailsPage: React.FC = () => {
                 planetError={planetError}
                 planet={planet}
               />
-            </div>
-          </div>
+              <div className="pt-2">
+              <Transformations
+                  showTransformations={showTransformations}
+                  transformations={character.transformations}
+                />
+              </div>
 
-          {/* Transformations below PlanetInformation */}
-          <div className="flex-none w-full md:w-1/4 flex justify-center items-start mt-4 md:mt-0">
-            <Transformations
-              showTransformations={showTransformations}
-              transformations={character.transformations}
-            />
+            </div>
           </div>
         </main>
       )}
