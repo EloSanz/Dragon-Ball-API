@@ -4,11 +4,9 @@ import HomePage from './components/HomePage';
 import CharacterDetailsPage from './components/CharacterDetailsPage';
 import PlanetDetail from './components/Planets/PlanetDetail';
 import Planets from './components/Planets/Planets';
-import ErrorBoundary from './ErrorBoundary';
 
 const App: React.FC = () => {
   return (
-    <ErrorBoundary>
 
     <Router>
       <div className="App">
@@ -23,7 +21,6 @@ const App: React.FC = () => {
         </main>
       </div>
     </Router>
-    </ErrorBoundary>
 
   );
 };

@@ -98,7 +98,7 @@ export const useSearch = () => {
 
   const showAllCharacters = () => {
     setSearchTerm('');
-    setParamName('name'); // Setting default paramName or adjust as needed
+    setParamName('name'); 
     setCurrentPage(1);
   };
 

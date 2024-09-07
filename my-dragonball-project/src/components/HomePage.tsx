@@ -27,6 +27,7 @@ const HomePage: React.FC = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
+    
   }, [activeFilters, handleSearch, showAllCharacters]);
 
   return (
