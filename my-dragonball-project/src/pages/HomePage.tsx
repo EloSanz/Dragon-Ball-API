@@ -8,6 +8,7 @@ import Pagination from "../components/Home/Pagination";
 import CharacterCard from "../components/Characters/CharacterCard";
 import Header from "../components/Home/Header";
 import Sidebar from "../components/Home/Sidebar";
+import Loader from "../components/Loader";
 
 const HomePage: React.FC = () => {
   const { activeFilters } = useFilters();
@@ -26,16 +27,18 @@ const HomePage: React.FC = () => {
 
   const navigate = useNavigate();
 
-  useEffect(() => {
-    
-  }, [activeFilters, handleSearch, showAllCharacters]);
+  useEffect(() => {}, [activeFilters, handleSearch, showAllCharacters]);
 
   return (
     <div>
-      <Header backgroundImg={backgroundImg} handleSearch={handleSearch}/>
-      
+      <Header
+        backgroundImg={backgroundImg}
+        handleSearch={handleSearch}
+        showAllCharacters={showAllCharacters}
+      />
+
       <main
-        className="flex flex-1 pt-[220px] "
+        className="flex flex-1 pt-[220px]"
         style={{ background: "linear-gradient(to right, #FF7E5F, #FEB47B)" }}
       >
         <Sidebar
@@ -45,38 +48,30 @@ const HomePage: React.FC = () => {
           setParamName={setParamName}
           setSearchTerm={setSearchTerm}
         />
-        <div className="w-3/4 p-4 ">
-          <button
-            onClick={showAllCharacters}
-            className="mb-4 px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600"
-          >
-            Show all
-          </button>
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 justify-center ">
-            {loading ? (
-              <p>Loading...</p>
+
+        <div className="w-3/4 p-4 flex flex-col items-center">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 w-full max-w-screen-lg">
+        {loading ? (
+              <div className="bg-gray-800 sm:w-full">
+                <Loader></Loader>
+              </div>
             ) : error ? (
               <p>{error}</p>
             ) : (
               characters.map((character) => (
-                <CharacterCard key={character.id} character={character} />
+                <div key={character.id}>
+                  <CharacterCard character={character} />
+                </div>
               ))
             )}
           </div>
-          <div>
             <Pagination
-                meta={meta}
-                links={links} // I was sending null instead of links
-                handlePageChange={handlePageChange}
+              meta={meta}
+              links={links}
+              handlePageChange={handlePageChange}
             />
         </div>
-        </div>
-
-
-
-
       </main>
-
 
       <Footer />
     </div>

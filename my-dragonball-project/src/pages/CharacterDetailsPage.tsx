@@ -6,6 +6,7 @@ import { usePlanetByCharacterName } from "../hooks/usePlanetByCharacterName ";
 import PlanetInformation from "../components/Planets/PlanetInformation";
 import CharacterCard_2 from "../components/Characters/CharacterCard_2";
 import Transformations from "../components/Characters/Transformations";
+import Loader from "../components/Loader";
 
 const CharacterDetailsPage: React.FC = () => {
   const { id = "0" } = useParams<{ id: string }>();
@@ -50,7 +51,7 @@ const CharacterDetailsPage: React.FC = () => {
     }
   }, [showTransformations]);
 
-  if (loading) return <p>Loading...</p>;
+  if (loading) return <Loader></Loader>;
   if (error) return <p>{error}</p>;
   if (!character) return <p>No character found.</p>;
 

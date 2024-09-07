@@ -1,5 +1,5 @@
 import React from "react";
-import { TransformationDto } from "../models/characterDto";
+import { TransformationDto } from "../../models/characterDto";
 
 interface TransformationsProps {
   transformations: TransformationDto[];

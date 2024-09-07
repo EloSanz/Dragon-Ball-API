@@ -16,8 +16,6 @@ export const useSearch = () => {
   const hasFilters = useMemo(() => searchTerm.length > 0, [searchTerm]);
   const { activeFilters } = useFilters();
 
-
-
   const fetchCharacters = useCallback(async (page: number, pageSize: number) => {
     setLoading(true);
     setError(null);
@@ -46,11 +44,19 @@ export const useSearch = () => {
             searchTerm,
             paramName
           );
+          const metaFilters: Meta = {
+            currentPage: 1, totalItems: response.length, itemsPerPage: pageSize,
+            itemCount: response.length,
+            totalPages: Math.ceil(response.length / pageSize)
+          };
 
-          filterCharactersByActiveFilters(response) 
+          const filteredCharacters = filterCharactersByActiveFilters(response);
+          const paginatedCharacters = filteredCharacters.slice((page - 1) * pageSize, page * pageSize);
+
+          setMeta(metaFilters);
           
-          setCharacters(response);
-          return response;
+          setCharacters(paginatedCharacters);
+          return paginatedCharacters;
         }
 
         response = await CharacterService.getCharactersWithFilters(
@@ -59,18 +65,27 @@ export const useSearch = () => {
           searchTerm,
           paramName
         );
-        console.log(response)
-        setCharacters(response);
+        const metaFilters: Meta = {
+          currentPage: 1, totalItems: response.length, itemsPerPage: pageSize,
+          itemCount: response.length,
+          totalPages: Math.ceil(response.length / pageSize)
+        };
+
+        const paginatedCharacters = response.slice((page - 1) * pageSize, page * pageSize);
+
+        setMeta(metaFilters);
+        setCharacters(paginatedCharacters);
         return response;
       } else {
         response = await CharacterService.getAllCharacters(page, pageSize);
+        const { items, meta, links } = response as { items: CharacterDto[]; meta: Meta; links: Links | null; };
+
+        console.log(items);
+        setCharacters(items);
+        setMeta(meta); 
+        setLinks(links);
       }
 
-      const { items, meta, links } = response as { items: CharacterDto[]; meta: Meta; links: Links | null; };
-
-      setCharacters(items);
-      setMeta(meta); 
-      setLinks(links);
     } catch (err) {
       setError('Error fetching characters');
       console.error(err);
@@ -81,7 +96,7 @@ export const useSearch = () => {
 
   
   useEffect(() => {
-    fetchCharacters(currentPage, 12);
+    fetchCharacters(currentPage, 6  );
   }, [currentPage, fetchCharacters]);
 
 

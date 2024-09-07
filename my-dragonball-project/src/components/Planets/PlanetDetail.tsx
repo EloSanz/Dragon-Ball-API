@@ -4,7 +4,7 @@ import { PlanetDto } from '../../models/PlanetDto';
 import PlanetService from '../../service/planetService';
 import DragonBallButton from '../DragonBallButton';
 import useDominantColor from '../../hooks/useDominantColor';
-
+import Loading from '../Loader';
 const PlanetDetail: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const [planet, setPlanet] = useState<PlanetDto | null>(null);
@@ -34,7 +34,7 @@ const PlanetDetail: React.FC = () => {
   }, [id]);
 
   if (loading) {
-    return <div className="text-center p-4">Loading...</div>;
+    return <Loading></Loading>
   }
 
   if (error) {

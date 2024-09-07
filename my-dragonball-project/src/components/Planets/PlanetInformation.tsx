@@ -1,4 +1,5 @@
 import React from "react";
+import Loader from "../Loader";
 
 interface PlanetInformationProps {
   showPlanet: boolean;
@@ -24,7 +25,7 @@ const PlanetInformation: React.FC<PlanetInformationProps> = ({
           {characterName} is from here
         </h5>
         {planetLoading ? (
-          <p>Loading planet...</p>
+          <Loader></Loader>
         ) : planetError ? (
           <p>{planetError}</p>
         ) : (
