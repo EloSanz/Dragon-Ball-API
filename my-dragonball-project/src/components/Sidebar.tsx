@@ -19,16 +19,15 @@ const Sidebar: React.FC<SidebarProps> = ({ showAllCharacters, handleSearch, navi
       const newFilters = { ...prev };
       const isActive = newFilters[field]?.includes(term);
 
-      // Clear other filters in the same field and set the new one
       if (!isActive) {
         newFilters[field] = [term];
         setSearchTerm(term);
         setParamName(field);
       } else {
-        // If the filter is already active, clear it
         newFilters[field] = [];
-        setSearchTerm('');
-        setParamName('');
+        handleSearch('', ''); 
+        //setSearchTerm('');
+        //setParamName('');
       }
 
       return newFilters;

@@ -31,7 +31,8 @@ const HomePage: React.FC = () => {
 
   return (
     <div>
-      <Header backgroundImg={backgroundImg} handleSearch={handleSearch} />
+      <Header backgroundImg={backgroundImg} handleSearch={handleSearch}/>
+      
       <main
         className="flex flex-1 pt-[220px] "
         style={{ background: "linear-gradient(to right, #FF7E5F, #FEB47B)" }}

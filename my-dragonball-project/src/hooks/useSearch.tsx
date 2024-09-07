@@ -17,21 +17,24 @@ export const useSearch = () => {
   const { activeFilters } = useFilters();
 
 
-  const filterCharactersByActiveFilters = (characters: CharacterDto[]) => {
-    return characters.filter(character => {
-      
-        const matchesRace = activeFilters.race.length === 0 || activeFilters.race.includes(character.race);
-        const matchesAffiliation = activeFilters.affiliation.length === 0 || activeFilters.affiliation.includes(character.affiliation);
-
-        return matchesRace && matchesAffiliation;
-    });
-};
-
 
   const fetchCharacters = useCallback(async (page: number, pageSize: number) => {
     setLoading(true);
     setError(null);
 
+    const filterCharactersByActiveFilters = (characters: CharacterDto[]) => {
+      const activeRaceFilter = activeFilters.race.length > 0 ? activeFilters.race[0] : null;
+      const activeAffiliationFilter = activeFilters.affiliation.length > 0 ? activeFilters.affiliation[0] : null;
+    
+      return characters.filter(character => {
+        if (activeRaceFilter) { return character.race === activeRaceFilter }
+        if (activeAffiliationFilter) {return character.affiliation === activeAffiliationFilter;
+        }
+        return true;
+  
+      });
+    };
+    
     try {
       let response;
 
@@ -74,13 +77,13 @@ export const useSearch = () => {
     } finally {
       setLoading(false);
     }
-  }, [searchTerm, paramName, hasFilters]);
-
+  }, [searchTerm, paramName, hasFilters, activeFilters]);
 
   
   useEffect(() => {
     fetchCharacters(currentPage, 12);
   }, [currentPage, fetchCharacters]);
+
 
   const handleSearch = useCallback((term: string, paramName: string) => {
     setSearchTerm(term);
