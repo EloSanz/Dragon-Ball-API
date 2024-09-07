@@ -5,6 +5,7 @@ interface CharacterCardProps {
   character: CharacterDto;
   onShowPlanet: () => void;
   showTransformations: boolean;
+  showPlanet: boolean;
   onToggleTransformations: () => void;
 }
 
@@ -13,6 +14,7 @@ const CharacterCard_2: React.FC<CharacterCardProps> = ({
   onShowPlanet,
   showTransformations,
   onToggleTransformations,
+  showPlanet
 }) => {
   return (
     <>
@@ -27,12 +29,16 @@ const CharacterCard_2: React.FC<CharacterCardProps> = ({
               {character.name}
             </h5>
             <div className="flex space-x-2">
+              
               <button
                 onClick={onShowPlanet}
                 className="px-3 py-2 text-sm font-medium text-white bg-green-700 rounded-lg hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800"
               >
-                Show Planet
+                {  showPlanet
+                  ? "Hide Planet"
+                  : "Show Planet"}
               </button>
+
               <button
                 onClick={onToggleTransformations}
                 className="px-3 py-2 text-sm font-medium text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"

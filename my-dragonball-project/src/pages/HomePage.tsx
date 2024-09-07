@@ -48,10 +48,10 @@ const HomePage: React.FC = () => {
           setSearchTerm={setSearchTerm}
         />
 
-        <div className="w-3/4 p-4 flex flex-col items-center">
+        <div className="sm:w-full w-3/4 p-4 flex flex-col items-center ">
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 w-full max-w-screen-lg">
         {loading ? (
-              <div className="bg-gray-800 sm:w-full">
+              <div className="w-full bg-gray-800 sm:w-full">
                 <Loader></Loader>
               </div>
             ) : error ? (

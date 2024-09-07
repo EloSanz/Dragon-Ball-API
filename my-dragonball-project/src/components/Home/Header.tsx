@@ -22,8 +22,8 @@ const Header: React.FC<HeaderProps> = ({
         backgroundPosition: "botton",
       }}
     >
-      <div className="justify-center max-w-screen-sm text-center m-4">
-        <h1 className="cursor-default drop-shadow-[0_1.6px_1.6px_rgba(0,1,1,1)]   font-extrabold px-3 py-5 sm:text-3xl md:text-6xl 
+      <div className="justify-center max-w-screen-sm text-center m-4 ">
+        <h1 className=" cursor-default drop-shadow-[0_1.6px_1.6px_rgba(0,1,1,1)]   font-extrabold px-3 py-5 sm:text-4xl  md:text-6xl 
          text-red-500 hover:scale-105 transition-colors duration-300">
           Dragon Ball Z Characters
         </h1>

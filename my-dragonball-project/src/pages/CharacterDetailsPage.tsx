@@ -40,7 +40,7 @@ const CharacterDetailsPage: React.FC = () => {
   useEffect(() => {
     const element = document.getElementById("character-card-container");
     if (showPlanet && element) {
-      element.style.transform = "translateX(-10%)";
+      element.style.transform = "translateX(-5%)";
     } else if (element) {
       element.style.transform = "translateX(0)";
     }
@@ -49,7 +49,7 @@ const CharacterDetailsPage: React.FC = () => {
   useEffect(() => {
     const element = document.getElementById("character-card-container");
     if (showTransformations && element) {
-      element.style.transform = "translateX(-10%)";
+      element.style.transform = "translateX(-5%)";
     } else if (element) {
       element.style.transform = "translateX(0)";
     }
@@ -91,6 +91,7 @@ const CharacterDetailsPage: React.FC = () => {
               <CharacterCard_2
                 character={character}
                 onShowPlanet={handleShowPlanet}
+                showPlanet={showPlanet}
                 showTransformations={showTransformations}
                 onToggleTransformations={handleToggleTransformations}
               />
@@ -105,7 +106,7 @@ const CharacterDetailsPage: React.FC = () => {
                 planetError={planetError}
                 planet={planet}
               />
-              <div className="pt-2">
+              <div className={showPlanet ? "pt-2" : "pt-0"}>
               <Transformations
                   showTransformations={showTransformations}
                   transformations={character.transformations}

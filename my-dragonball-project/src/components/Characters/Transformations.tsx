@@ -34,7 +34,7 @@ const Transformations: React.FC<TransformationsProps> = ({
                 {transformations.map((transformation) => (
                   <div
                     key={transformation.id.toString()}
-                    className="shadow-lime-800 flex flex-col items-center space-y-4 rounded-lg dark:bg-gray-800 dark:border-gray-700 border border-slate-200 p-4"
+                    className="hover:scale-105 shadow-lime-800 flex flex-col items-center space-y-4 rounded-lg dark:bg-gray-800 dark:border-gray-700 border border-slate-200 p-4"
                   >
                     {loadingImage && (
                       <div className="w-20 h-20 md:w-24 md:h-24 flex items-center justify-center">
