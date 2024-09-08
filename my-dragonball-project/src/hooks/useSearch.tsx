@@ -127,6 +127,7 @@ export const useSearch = () => {
     searchTerm,
     paramName,
     currentPage,
+    setCurrentPage,
     setParamName,
     setSearchTerm,
     fetchCharacters

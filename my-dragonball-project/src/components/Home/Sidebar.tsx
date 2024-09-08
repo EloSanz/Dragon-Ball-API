@@ -8,10 +8,11 @@ interface SidebarProps {
   handleSearch: (term: string, paramName: string) => void;
   navigate: (path: string) => void;
   setParamName: (param: string) => void;
+  setCurrentPage: (page: number) => void;
   setSearchTerm: (term: string) => void;
 }
 
-const Sidebar: React.FC<SidebarProps> = ({ showAllCharacters, handleSearch, navigate, setParamName, setSearchTerm }) => {
+const Sidebar: React.FC<SidebarProps> = ({ setCurrentPage, showAllCharacters, handleSearch, navigate, setParamName, setSearchTerm }) => {
   const { activeFilters, setActiveFilters } = useFilters();
 
   const handleFilterClick = (term: string, field: string) => {
@@ -23,8 +24,10 @@ const Sidebar: React.FC<SidebarProps> = ({ showAllCharacters, handleSearch, navi
         newFilters[field] = [term];
         setSearchTerm(term);
         setParamName(field);
+        setCurrentPage(1);
       } else {
         newFilters[field] = [];
+        setCurrentPage(1);
         handleSearch('', ''); 
       }
 
@@ -33,6 +36,7 @@ const Sidebar: React.FC<SidebarProps> = ({ showAllCharacters, handleSearch, navi
   };
 
   const handleClearFilters = () => {
+    setCurrentPage(1);
     setActiveFilters({ race: [], affiliation: [] });
     handleSearch('', '');
     showAllCharacters();

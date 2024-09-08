@@ -18,6 +18,7 @@ const HomePage: React.FC = () => {
     error,
     meta,
     links,
+    setCurrentPage,
     handleSearch,
     handlePageChange,
     showAllCharacters,
@@ -43,6 +44,7 @@ const HomePage: React.FC = () => {
       >
         <div className="hidden md:flex justify-center w-1/4 ">
           <Sidebar
+          setCurrentPage={setCurrentPage}
             showAllCharacters={showAllCharacters}
             handleSearch={handleSearch}
             navigate={navigate}
@@ -78,6 +80,7 @@ const HomePage: React.FC = () => {
         <div className="sm:block md:hidden p-4 flex flex-col items-center">
           <Sidebar
             showAllCharacters={showAllCharacters}
+            setCurrentPage={setCurrentPage}
             handleSearch={handleSearch}
             navigate={navigate}
             setParamName={setParamName}
