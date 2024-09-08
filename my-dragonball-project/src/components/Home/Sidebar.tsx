@@ -40,6 +40,7 @@ const Sidebar: React.FC<SidebarProps> = ({ setCurrentPage, showAllCharacters, ha
     setActiveFilters({ race: [], affiliation: [] });
     handleSearch('', '');
     showAllCharacters();
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   return (
