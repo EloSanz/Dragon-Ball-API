@@ -38,21 +38,24 @@ const HomePage: React.FC = () => {
       />
 
       <main
-        className="flex flex-1 pt-[220px]"
+        className="flex flex-col md:flex-row pt-[220px]"
         style={{ background: "linear-gradient(to right, #FF7E5F, #FEB47B)" }}
       >
-        <Sidebar showAllCharacters={showAllCharacters}
-          handleSearch={handleSearch}
-          navigate={navigate}
-          setParamName={setParamName}
-          setSearchTerm={setSearchTerm}
-        />
+        <div className="flex justify-center md:block w-1/4 sm:hidden">
+          <Sidebar
+            showAllCharacters={showAllCharacters}
+            handleSearch={handleSearch}
+            navigate={navigate}
+            setParamName={setParamName}
+            setSearchTerm={setSearchTerm}
+          />
+        </div>
 
         <div className="sm:w-full w-3/4 p-4 flex flex-col items-center ">
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 w-full max-w-screen-lg">
-        {loading ? (
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 w-full max-w-screen-lg">
+            {loading ? (
               <div className="w-full bg-gray-800 sm:w-full">
-                <Loader></Loader>
+                <Loader />
               </div>
             ) : error ? (
               <p>{error}</p>
@@ -64,11 +67,23 @@ const HomePage: React.FC = () => {
               ))
             )}
           </div>
-            <Pagination
-              meta={meta}
-              links={links}
-              handlePageChange={handlePageChange}
-            />
+
+          <Pagination
+            meta={meta}
+            links={links}
+            handlePageChange={handlePageChange}
+          />
+        </div>
+
+        {/** Remove this div in md */}
+        <div className=" md:hidden p-4 flex flex-col items-center">
+          <Sidebar
+            showAllCharacters={showAllCharacters}
+            handleSearch={handleSearch}
+            navigate={navigate}
+            setParamName={setParamName}
+            setSearchTerm={setSearchTerm}
+          ></Sidebar>
         </div>
       </main>
 

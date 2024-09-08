@@ -26,8 +26,6 @@ const Sidebar: React.FC<SidebarProps> = ({ showAllCharacters, handleSearch, navi
       } else {
         newFilters[field] = [];
         handleSearch('', ''); 
-        //setSearchTerm('');
-        //setParamName('');
       }
 
       return newFilters;
@@ -42,7 +40,7 @@ const Sidebar: React.FC<SidebarProps> = ({ showAllCharacters, handleSearch, navi
 
   return (
     <aside
-      className=" m-3 w-60 p-5 bg-orange-500 hidden md:block rounded-lg"
+      className=" m-3 w-60 p-5 bg-orange-500 hidden sm:block md:block rounded-lg"
       style={{
         backgroundImage: `url(${backgroundImg})`,
         backgroundSize: "cover",
