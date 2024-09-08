@@ -8,6 +8,7 @@ import { PlanetDto } from "../models/characterDto";
 import Loader from "../components/Loader";
 
 const Planets: React.FC = () => {
+
   const { planets, loading, error } = usePlanets();
   const navigate = useNavigate();
 

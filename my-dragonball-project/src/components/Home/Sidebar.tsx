@@ -35,6 +35,10 @@ const Sidebar: React.FC<SidebarProps> = ({ setCurrentPage, showAllCharacters, ha
     });
   };
 
+  const handleRedirect = () => {
+    setActiveFilters({ race: [], affiliation: [] }); 
+    navigate("/planets");
+  };
   const handleClearFilters = () => {
     setCurrentPage(1);
     setActiveFilters({ race: [], affiliation: [] });
@@ -101,7 +105,7 @@ const Sidebar: React.FC<SidebarProps> = ({ setCurrentPage, showAllCharacters, ha
       <div className="flex flex-col items-center">
         <h2 className=" cursor-default text-center text-3xl font-bold mt-4 mb-2">Planets</h2>
         <button
-          onClick={() => navigate("/planets")}
+          onClick={handleRedirect}
           className=" block px-4 py-2 font-semibold text-white bg-green-500 rounded-md hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-400"
         >
           Let's go!
