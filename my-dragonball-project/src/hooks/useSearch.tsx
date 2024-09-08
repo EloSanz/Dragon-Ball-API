@@ -80,7 +80,6 @@ export const useSearch = () => {
         response = await CharacterService.getAllCharacters(page, pageSize);
         const { items, meta, links } = response as { items: CharacterDto[]; meta: Meta; links: Links | null; };
 
-        console.log(items);
         setCharacters(items);
         setMeta(meta); 
         setLinks(links);
@@ -104,7 +103,6 @@ export const useSearch = () => {
     setSearchTerm(term);
     setParamName(paramName);
     setCurrentPage(1);
-    console.log(term, paramName);
   }, []);
 
   const handlePageChange = (page: number) => {

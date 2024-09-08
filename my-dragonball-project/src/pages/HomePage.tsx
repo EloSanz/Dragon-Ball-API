@@ -41,7 +41,7 @@ const HomePage: React.FC = () => {
         className="flex flex-col md:flex-row pt-[220px]"
         style={{ background: "linear-gradient(to right, #FF7E5F, #FEB47B)" }}
       >
-        <div className="flex justify-center md:block w-1/4 sm:hidden">
+        <div className="hidden md:flex justify-center w-1/4 ">
           <Sidebar
             showAllCharacters={showAllCharacters}
             handleSearch={handleSearch}
@@ -51,8 +51,8 @@ const HomePage: React.FC = () => {
           />
         </div>
 
-        <div className="sm:w-full w-3/4 p-4 flex flex-col items-center ">
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 w-full max-w-screen-lg">
+        <div className="sm:w-full  p-4 flex flex-col items-center">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 w-full max-w-screen-lg mx-auto">
             {loading ? (
               <div className="w-full bg-gray-800 sm:w-full">
                 <Loader />
@@ -75,8 +75,7 @@ const HomePage: React.FC = () => {
           />
         </div>
 
-        {/** Remove this div in md */}
-        <div className=" md:hidden p-4 flex flex-col items-center">
+        <div className="sm:block md:hidden p-4 flex flex-col items-center">
           <Sidebar
             showAllCharacters={showAllCharacters}
             handleSearch={handleSearch}
