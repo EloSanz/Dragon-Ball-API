@@ -59,7 +59,7 @@ const HomePage: React.FC = () => {
             ) : (
               characters.map((character) => (
                 <div key={character.id}>
-                  <CharacterCard character={character} />
+                  <CharacterCard loading={loading} character={character} />
                 </div>
               ))
             )}
