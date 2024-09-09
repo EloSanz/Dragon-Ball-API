@@ -23,7 +23,8 @@ class CharacterService {
     page: number,
     limit: number,
     search: string,
-    paramName: string
+    paramName: string,
+    gender? : string,
   ): Promise<CharacterDto[]> {
     try {
 
@@ -32,6 +33,7 @@ class CharacterService {
           page,
           limit,
           [paramName]: search,
+          gender: gender || undefined
         },
       });
 

@@ -17,6 +17,7 @@ export const FiltersProvider: React.FC<{ children: ReactNode }> = ({ children })
   const [activeFilters, setActiveFilters] = useState<Filters>({
     race: [],
     affiliation: [],
+    gender: [],
   });
 
   return (

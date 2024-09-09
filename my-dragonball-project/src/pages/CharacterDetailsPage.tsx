@@ -7,7 +7,7 @@ import PlanetInformation from "../components/Planets/PlanetInformation";
 import CharacterCard_2 from "../components/Characters/CharacterCard_2";
 import Transformations from "../components/Characters/Transformations";
 import Loader from "../components/Loader";
-import { useFilters } from "../FiltersProvider";
+import { useFilters } from "../utils/FiltersProvider";
 
 const CharacterDetailsPage: React.FC = () => {
   const { id = "0" } = useParams<{ id: string }>();
@@ -26,7 +26,7 @@ const CharacterDetailsPage: React.FC = () => {
 
   const handleRedirect = () => {
     
-    setActiveFilters({ race: [], affiliation: [] }); 
+    setActiveFilters({ race: [], affiliation: [], gender: [] });
 
     navigate("/");
   };

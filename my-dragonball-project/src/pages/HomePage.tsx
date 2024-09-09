@@ -1,6 +1,6 @@
 import { useSearch } from "../hooks/useSearch";
 import { useNavigate } from "react-router-dom";
-import { useFilters } from "../FiltersProvider";
+import { useFilters } from "../utils/FiltersProvider";
 import backgroundImg from "../assets/images/dragonBall.png";
 import Footer from "../components/Home/Footer";
 import { useEffect, useState } from "react";

@@ -1,7 +1,8 @@
-import React from 'react';
-import backgroundImg from '../../assets/images/gokuNube.jpg';
-import { useFilters } from '../../FiltersProvider';
-import DragonBallButton from '../DragonBallButton';
+import React from "react";
+import backgroundImg from "../../assets/images/gokuNube.jpg";
+import { useFilters } from "../../utils/FiltersProvider";
+import DragonBallButton from "../DragonBallButton";
+import GenderFilter from "./GenderFilter";
 
 interface SidebarProps {
   showAllCharacters: () => void;
@@ -13,7 +14,15 @@ interface SidebarProps {
   setClearSearch: (clear: boolean) => void;
 }
 
-const Sidebar: React.FC<SidebarProps> = ({ setCurrentPage, showAllCharacters, handleSearch, navigate, setParamName, setSearchTerm, setClearSearch }) => {
+const Sidebar: React.FC<SidebarProps> = ({
+  setCurrentPage,
+  showAllCharacters,
+  handleSearch,
+  navigate,
+  setParamName,
+  setSearchTerm,
+  setClearSearch,
+}) => {
   const { activeFilters, setActiveFilters } = useFilters();
 
   const handleFilterClick = (term: string, field: string) => {
@@ -23,10 +32,10 @@ const Sidebar: React.FC<SidebarProps> = ({ setCurrentPage, showAllCharacters, ha
       const isActive = newFilters[field]?.includes(term);
 
       if (!isActive) {
-        if (field === 'race') {
-          newFilters['affiliation'] = [];
-        } else if (field === 'affiliation') {
-          newFilters['race'] = [];
+        if (field === "race") {
+          newFilters["affiliation"] = [];
+        } else if (field === "affiliation") {
+          newFilters["race"] = [];
         }
 
         newFilters[field] = [term];
@@ -36,29 +45,50 @@ const Sidebar: React.FC<SidebarProps> = ({ setCurrentPage, showAllCharacters, ha
       } else {
         newFilters[field] = [];
         setCurrentPage(1);
-        handleSearch('', ''); 
+        handleSearch("", "");
       }
 
       setClearSearch(true);
       return newFilters;
     });
   };
+  const handleGenderClick = (gender: string) => {
+    setActiveFilters((prev) => {
+      const newFilters = { ...prev };
+      const isActive = newFilters.gender?.includes(gender);
 
+      if (!isActive) {
+        newFilters.gender = [gender];
+        setSearchTerm(gender);
+        setParamName("gender");
+      } else {
+        newFilters.gender = [];
+        setClearSearch(true);
+
+      }
+
+      window.scrollTo({ top: 0, behavior: "smooth" });
+      setCurrentPage(1);
+      setClearSearch(true);
+      return newFilters;
+    });
+  };
   const handleRedirect = () => {
-    setActiveFilters({ race: [], affiliation: [] });
-    setClearSearch(true); 
+    setActiveFilters({ race: [], affiliation: [], gender: [] });
+    setClearSearch(true);
     navigate("/planets");
   };
   const handleClearFilters = () => {
     setCurrentPage(1);
-    setActiveFilters({ race: [], affiliation: [] });
-    handleSearch('', '');
+    setActiveFilters({ race: [], affiliation: [], gender: [] });
+    handleSearch("", "");
     showAllCharacters();
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   return (
-    <aside className=" m-3 w-60 p-5 bg-orange-500 sm:block sm:w-max md:block rounded-lg"
+    <aside
+      className=" m-3 w-60 p-5 bg-orange-500 sm:block sm:w-max md:block rounded-lg"
       style={{
         backgroundImage: `url(${backgroundImg})`,
         backgroundSize: "cover",
@@ -66,9 +96,11 @@ const Sidebar: React.FC<SidebarProps> = ({ setCurrentPage, showAllCharacters, ha
         backgroundRepeat: "no-repeat",
       }}
     >
-      <h2 className=" cursor-default text-3xl font-bold mb-4 text-center">Filters</h2>
+      <h2 className=" cursor-default text-3xl font-bold mb-4 text-center">
+        Filters
+      </h2>
 
-      <div className="flex flex-col items-center">
+      <div className="flex flex-col  items-center">
         <button
           onClick={handleClearFilters}
           className="m-4 px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-600"
@@ -110,10 +142,21 @@ const Sidebar: React.FC<SidebarProps> = ({ setCurrentPage, showAllCharacters, ha
           onClick={() => handleFilterClick("Android", "race")}
           active={activeFilters.race.includes("Android")}
         />
+        <div className="flex flex-col items-center mt-4">
+          <h2 className="cursor-default text-3xl font-bold pb-1 text-center">
+            Gender
+          </h2>
+          <GenderFilter
+            handleGenderClick={handleGenderClick}
+            activeFilters={activeFilters.gender || []}
+          />
+        </div>
       </div>
 
       <div className="flex flex-col items-center">
-        <h2 className=" cursor-default text-center text-3xl font-bold mt-4 mb-2">Planets</h2>
+        <h2 className=" cursor-default text-center text-3xl font-bold mt-4 mb-2">
+          Planets
+        </h2>
         <button
           onClick={handleRedirect}
           className=" block px-4 py-2 font-semibold text-white bg-green-500 rounded-md hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-400"

@@ -1,15 +1,29 @@
 import React from "react";
 import { PlanetDto } from "../../models/characterDto";
+import Loader from "../Loader";
 
 interface PlanetCardProps {
-  planet: PlanetDto;
+  planet?: PlanetDto; 
+  loading?: boolean; 
   onViewDetails: (id: number) => void;
 }
 
-const PlanetCard: React.FC<PlanetCardProps> = ({ planet, onViewDetails }) => {
+const PlanetCard: React.FC<PlanetCardProps> = ({ planet, loading, onViewDetails }) => {
+  if (loading) {
+    return (
+      <div className="w-full max-w-sm mb-4 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+        <Loader />
+      </div>
+    );
+  }
+
+  if (!planet) {
+    return null;
+  }
+
   return (
     <div
-      className=" hover:scale-105 w-full max-w-sm mb-4 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 transform transition-transform duration-500 cursor-pointer"
+      className="hover:scale-105 w-full max-w-sm mb-4 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 transform transition-transform duration-500 cursor-pointer"
       onClick={() => onViewDetails(planet.id)}
     >
       <img
