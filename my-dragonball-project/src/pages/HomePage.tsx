@@ -60,7 +60,7 @@ const HomePage: React.FC = () => {
           />
         </div>
         <div className="sm:w-full p-4 flex flex-col items-center">
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 w-full max-w-screen-lg mx-auto">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 w-full  mx-auto">
             {loading ? (
               <div className="w-full bg-gray-800">
                 <Loader />

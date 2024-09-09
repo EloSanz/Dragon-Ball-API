@@ -36,7 +36,7 @@ const SearchBar: React.FC<SearchBarProps> = ({
     <div className="sm:mt-[-50px] sm:right-2 absolute  md:right-10 pr-2 flex justify-end">
       <button
         onClick={showAllCharacters}
-        className="h-12 sm:h-14 mr-2 mb-4 px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600"
+        className="h-auto sm:h-14 mr-2 mb-4 p-4 bg-blue-500 text-white rounded-md hover:bg-blue-600"
       >
         Show all
       </button>
