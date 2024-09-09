@@ -58,7 +58,7 @@ const Sidebar: React.FC<SidebarProps> = ({ setCurrentPage, showAllCharacters, ha
   };
 
   return (
-    <aside className=" m-3 w-60 p-5 bg-orange-500 sm:block md:block rounded-lg"
+    <aside className=" m-3 w-60 p-5 bg-orange-500 sm:block sm:w-auto md:block rounded-lg"
       style={{
         backgroundImage: `url(${backgroundImg})`,
         backgroundSize: "cover",
