@@ -5,13 +5,15 @@ interface HeaderProps {
   backgroundImg: string;
   handleSearch: (term: string, paramName: string) => void;
   showAllCharacters: () => void;
+  clearSearch: boolean;
 }
 
 const Header: React.FC<HeaderProps> = ({
   
   backgroundImg,
   handleSearch,
-  showAllCharacters
+  showAllCharacters,
+  clearSearch
 }) => {
 
   return (
@@ -27,9 +29,10 @@ const Header: React.FC<HeaderProps> = ({
          text-red-500 hover:scale-105 transition-colors duration-300 sm:text-4xl ">
           Dragon Ball Z Characters
         </h1>
-      </div>
+      </div> 
+
       
-      <SearchBar onSearch={(term) => handleSearch(term, 'name')} showAllCharacters={showAllCharacters} />
+      <SearchBar onSearch={(term) => handleSearch(term, 'name')}  showAllCharacters={showAllCharacters} clearSearch={clearSearch} />
     </header>
   );
 };

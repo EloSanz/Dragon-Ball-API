@@ -10,17 +10,25 @@ interface SidebarProps {
   setParamName: (param: string) => void;
   setCurrentPage: (page: number) => void;
   setSearchTerm: (term: string) => void;
+  setClearSearch: (clear: boolean) => void;
 }
 
-const Sidebar: React.FC<SidebarProps> = ({ setCurrentPage, showAllCharacters, handleSearch, navigate, setParamName, setSearchTerm }) => {
+const Sidebar: React.FC<SidebarProps> = ({ setCurrentPage, showAllCharacters, handleSearch, navigate, setParamName, setSearchTerm, setClearSearch }) => {
   const { activeFilters, setActiveFilters } = useFilters();
 
   const handleFilterClick = (term: string, field: string) => {
     setActiveFilters((prev) => {
       const newFilters = { ...prev };
+
       const isActive = newFilters[field]?.includes(term);
 
       if (!isActive) {
+        if (field === 'race') {
+          newFilters['affiliation'] = [];
+        } else if (field === 'affiliation') {
+          newFilters['race'] = [];
+        }
+
         newFilters[field] = [term];
         setSearchTerm(term);
         setParamName(field);
@@ -31,12 +39,14 @@ const Sidebar: React.FC<SidebarProps> = ({ setCurrentPage, showAllCharacters, ha
         handleSearch('', ''); 
       }
 
+      setClearSearch(true);
       return newFilters;
     });
   };
 
   const handleRedirect = () => {
-    setActiveFilters({ race: [], affiliation: [] }); 
+    setActiveFilters({ race: [], affiliation: [] });
+    setClearSearch(true); 
     navigate("/planets");
   };
   const handleClearFilters = () => {

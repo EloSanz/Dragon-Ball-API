@@ -12,6 +12,8 @@ interface FiltersContextType {
 const FiltersContext = createContext<FiltersContextType | undefined>(undefined);
 
 export const FiltersProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
+
+  
   const [activeFilters, setActiveFilters] = useState<Filters>({
     race: [],
     affiliation: [],
@@ -24,6 +26,7 @@ export const FiltersProvider: React.FC<{ children: ReactNode }> = ({ children })
   );
 };
 
+// eslint-disable-next-line react-refresh/only-export-components
 export const useFilters = () => {
   const context = useContext(FiltersContext);
   if (context === undefined) {

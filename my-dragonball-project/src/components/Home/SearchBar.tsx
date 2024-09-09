@@ -1,11 +1,16 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 interface SearchBarProps {
   onSearch: (searchTerm: string) => void;
   showAllCharacters: () => void;
+  clearSearch: boolean;
 }
 
-const SearchBar: React.FC<SearchBarProps> = ({ onSearch, showAllCharacters}) => {
+const SearchBar: React.FC<SearchBarProps> = ({
+  onSearch,
+  showAllCharacters,
+  clearSearch,
+}) => {
   const [searchTerm, setSearchTerm] = useState("");
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -21,11 +26,15 @@ const SearchBar: React.FC<SearchBarProps> = ({ onSearch, showAllCharacters}) => 
   const handleSubmit = () => {
     onSearch(searchTerm);
   };
-
+  useEffect(() => {
+    if (clearSearch) {
+      setSearchTerm("");
+    }
+  }, [clearSearch]);
+  
   return (
     <div className="sm:mt-[-50px] sm:right-2 absolute  md:right-10 pr-2 flex justify-end">
-      
-    <button
+      <button
         onClick={showAllCharacters}
         className="h-12 sm:h-14 mr-2 mb-4 px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600"
       >
