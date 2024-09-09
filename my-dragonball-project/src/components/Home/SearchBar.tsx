@@ -27,7 +27,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ onSearch, showAllCharacters}) => 
       
     <button
         onClick={showAllCharacters}
-        className="h-12 mr-2 mb-4 px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600"
+        className="h-12 sm:h-14 mr-2 mb-4 px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600"
       >
         Show all
       </button>
