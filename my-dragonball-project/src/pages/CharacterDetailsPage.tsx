@@ -25,7 +25,6 @@ const CharacterDetailsPage: React.FC = () => {
   } = usePlanetByCharacterName(character?.name ?? "");
 
   const handleRedirect = () => {
-    
     setActiveFilters({ race: [], affiliation: [] }); 
 
     navigate("/");

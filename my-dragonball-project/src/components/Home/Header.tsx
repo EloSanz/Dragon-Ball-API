@@ -26,7 +26,7 @@ const Header: React.FC<HeaderProps> = ({
     >
       <div className="justify-center max-w-screen-sm text-center m-4 ">
         <h1 className=" cursor-default drop-shadow-[0_1.6px_1.6px_rgba(0,1,1,1)]   font-extrabold px-3 py-5 md:text-6xl 
-         text-red-500 hover:scale-105 transition-colors duration-300 sm:text-4xl ">
+         text-red-500 hover:scale-105 transition-colors duration-300 md:text-left">
           Dragon Ball Z Characters
         </h1>
       </div> 
