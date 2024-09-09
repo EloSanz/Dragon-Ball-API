@@ -79,8 +79,8 @@ const HomePage: React.FC = () => {
 
         <div className="sm:block md:hidden p-4 flex flex-col items-center">
           <Sidebar
-            showAllCharacters={showAllCharacters}
             setCurrentPage={setCurrentPage}
+            showAllCharacters={showAllCharacters}
             handleSearch={handleSearch}
             navigate={navigate}
             setParamName={setParamName}
