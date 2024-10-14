@@ -1,0 +1,40 @@
+name: CI for Dragon-Ball-API with QA tests
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Checkout the Dragon-Ball-API repo
+      - name: Checkout Dragon-Ball-API
+        uses: actions/checkout@v3
+
+      # Clone the QA repository containing the tests
+      - name: Clone QA repository
+        run: git clone https://github.com/EloSanz/QA.git
+
+      # Set up Node.js (adjust the version if needed)
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16'
+
+      # Install dependencies for Dragon-Ball-API (if applicable)
+      - name: Install dependencies for Dragon-Ball-API
+        run: npm install
+
+      # Install dependencies for QA repo (if applicable)
+      - name: Install dependencies for QA tests
+        run: cd QA && npm install
+
+      # Run the tests (adjust the command to match how you run your tests)
+      - name: Run tests
+        run: cd QA && npm test
