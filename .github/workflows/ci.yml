@@ -15,7 +15,7 @@ jobs:
     steps:
       # Checkout the Dragon-Ball-API repo
       - name: Checkout Dragon-Ball-API
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       # Clone the QA repository containing the tests
       - name: Clone QA repository
