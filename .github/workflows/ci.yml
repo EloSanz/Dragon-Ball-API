@@ -39,6 +39,10 @@ jobs:
           cd QA
           npm install
 
+      # Install Playwright browsers
+      - name: Install Playwright browsers
+        run: npx playwright install
+
       # Run the tests (adjust the command to match how you run your tests)
       - name: Run tests
         run: |
