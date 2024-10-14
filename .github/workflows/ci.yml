@@ -49,4 +49,4 @@ jobs:
       - name: Run Playwright tests in headless mode
         run: |
           cd QA
-          npx playwright test --headless
+          npm run test
