@@ -39,11 +39,6 @@ jobs:
           cd QA
           npm install
 
-      #Install system dependencies for Playwright
-      - name: Install Playwright dependencies
-        run: sudo npx playwright install-deps
-
-
       # Install Playwright browsers (inside the QA directory)
       - name: Install Playwright browsers
         run: |
