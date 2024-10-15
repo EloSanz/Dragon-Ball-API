@@ -15,7 +15,7 @@ jobs:
     steps:
       # Checkout the Dragon-Ball-API repoooo
       - name: Checkout Dragon-Ball-API
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       # Clone the QA repository containing the tests
       - name: Clone QA repository
@@ -23,7 +23,7 @@ jobs:
 
       # Set up Node.js (set to version 20.x to match your local version)
       - name: Set up Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: '20.x'
 
@@ -38,6 +38,11 @@ jobs:
         run: |
           cd QA
           npm install
+
+      #Install system dependencies for Playwright
+      - name: Install Playwright dependencies
+        run: sudo npx playwright install-deps
+
 
       # Install Playwright browsers (inside the QA directory)
       - name: Install Playwright browsers
