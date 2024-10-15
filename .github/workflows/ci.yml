@@ -1,4 +1,4 @@
-name: CI for Dragon-Ball-API with QA tests
+name: CI for Dragon-Ball-API with QA testss
 
 on:
   push:
