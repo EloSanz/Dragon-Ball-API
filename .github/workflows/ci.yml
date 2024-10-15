@@ -13,7 +13,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # Checkout the Dragon-Ball-API repo
+      # Checkout the Dragon-Ball-API repoooo
       - name: Checkout Dragon-Ball-API
         uses: actions/checkout@v3
 
