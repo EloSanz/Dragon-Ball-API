@@ -1,0 +1,52 @@
+name: CI for Dragon-Ball-API with QA testss
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Checkout the Dragon-Ball-API repoooo
+      - name: Checkout Dragon-Ball-API
+        uses: actions/checkout@v3
+
+      # Clone the QA repository containing the tests
+      - name: Clone QA repository
+        run: git clone https://github.com/EloSanz/QA.git
+
+      # Set up Node.js (set to version 20.x to match your local version)
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20.x'
+
+      # Install dependencies for Dragon-Ball-API in the correct folder
+      - name: Install dependencies for Dragon-Ball-API
+        run: |
+          cd my-dragonball-project
+          npm install
+
+      # Install dependencies for QA repo (if applicable)
+      - name: Install dependencies for QA tests
+        run: |
+          cd QA
+          npm install
+
+      # Install Playwright browsers (inside the QA directory)
+      - name: Install Playwright browsers
+        run: |
+          cd QA
+          npx playwright install
+
+      # Run the Playwright tests in headless mode
+      - name: Run Playwright tests in headless mode
+        run: |
+          cd QA
+          npm run test
